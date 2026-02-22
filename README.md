@@ -1,5 +1,7 @@
 # Artifact Detection in Generated Images 
 
+Dataset: https://drive.google.com/file/d/16bv-5qEL_ajlZ1FbdSjJMRXcg3LS4lzb/view?usp=sharing
+
 ## Overview
 This repository presents a deep learning project for detecting artifacts in generated images using a Convolutional Neural Network (CNN).
 
