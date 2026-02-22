@@ -54,3 +54,13 @@ def get_resnet18(num_classes=2, pretrained=False):
     num_ftrs = model.fc.in_features
     model.fc = nn.Linear(num_ftrs, num_classes)
     return model
+
+def get_model(model_name, num_classes):
+    if model_name == "resnet18":
+        return get_resnet18(num_classes)
+
+    elif model_name == "cnn":
+        return ArtifactCNN(num_classes)
+
+    else:
+        raise ValueError(f"Unknown model: {model_name}")
