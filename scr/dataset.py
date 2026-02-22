@@ -16,4 +16,4 @@ class ImageDataset(Dataset):
         if self.transform:
             img = self.transform(img)
         label = self.labels[idx]
-        return img, label
+        return img, label 
