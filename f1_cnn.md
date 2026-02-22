@@ -1,49 +1,96 @@
-# F1 metrics (CNN model)
+# F1-Score Analysis — Custom CNN Model
 
-The model was trained for 10 epochs on a highly imbalanced dataset (class 0: minority, class 1: majority). The reported metrics include train/validation loss, F1 scores, and confusion matrices.
+## Experiment Overview
+
+The model was trained for 10 epochs on a highly imbalanced dataset (class 0: minority, class 1: majority).
+Due to class imbalance (~1:9 ratio), the primary evaluation metric is F1-score, as it better reflects performance than accuracy alone.
+
+<img width="981" height="451" alt="image" src="https://github.com/user-attachments/assets/2d43249d-c9cd-454b-90be-8384b4ca4b58" />
+<img width="981" height="451" alt="image" src="https://github.com/user-attachments/assets/2d43249d-c9cd-454b-90be-8384b4ca4b58" />
 
 ## Training Performance
 
-<img width="981" height="451" alt="image" src="https://github.com/user-attachments/assets/2d43249d-c9cd-454b-90be-8384b4ca4b58" />
-<img width="981" height="451" alt="image" src="https://github.com/user-attachments/assets/2d43249d-c9cd-454b-90be-8384b4ca4b58" />
+**Loss**
 
+- Decreases steadily: 0.2214 → 0.0684
 
-- Loss steadily decreases on the training set: Starts at 0.2214 → ends at 0.0684.
+- Indicates stable optimization
 
-- F1 score on training improves: Starts at 0.9361 → ends at 0.9764.
+- No instability during training
 
-- Confusion matrices show that the model predicts the majority class (class 1) very well.
-Minority class (class 0) predictions improve gradually but remain challenging.
-Model is learning effectively on the training data.
+**F1 Score**
 
-High F1 score indicates strong overall performance, but the class imbalance still influences the predictions.
+- Improves consistently: 0.9361 → 0.9764
+
+- High training F1 suggests strong learning capacity
+
+**Confusion Matrix Insights**
+
+- Majority class (Class 1) is predicted almost perfectly.
+
+- Minority class (Class 0) improves over time but remains under-predicted.
+
+- The model clearly learns dominant patterns in the dataset.
+
+**Conclusion:**
+The model fits the training data very well. However, the class imbalance still influences the predictions.
 
 ## Validation Performance
 
-- Validation loss fluctuates: Between 0.7167 and 1.4429. Not strictly decreasing, suggesting overfitting to the training set.
+**Loss**
 
-- Validation F1 score drops over epochs: Starts high at 0.8972 → drops to 0.5528 by epoch 10.
+- Fluctuates between 0.7167 and 1.4429
 
-- Confusion matrices reveal many false negatives for the minority class (class 0).
+- Not consistently decreasing
 
-## Epoch 1 (best F1 on validation):
+- Suggests early signs of overfitting
 
-Val Confusion Matrix:
+**F1 Score**
 
-[[ 2 34]
+- Starts high: 0.8972
 
- [ 3 321]]
- 
-Class 0 is under-predicted (2/36 correct), class 1 is mostly correct.
+- Gradually drops to 0.5528 by epoch 10
 
-Even at best F1, the minority class is poorly recognized.
+This decline indicates that the model increasingly memorizes training data rather than learning generalizable features.
 
-## Test
+## Best Validation Epoch
 
-- Model generalizes reasonably well to the majority class.
+**Epoch 1 (Highest Validation F1)**
 
-- Minority class (class 0) is still poorly recognized on the test set.
+Validation Confusion Matrix:
 
-Despite limitations, the model provides a baseline benchmark for artifact detection on this dataset.
+[[  2  34]
+ [  3 321]]
+
+Interpretation:
+
+- Class 0: Only 2 out of 36 correctly classified
+
+- Class 1: 321 out of 324 correctly classified
+
+Even at peak validation F1:
+
+- Minority class recall remains extremely low
+
+- Model heavily favors the majority class
+
+## Test Set Performance
+
+- Strong performance on majority class (clean images)
+
+- Minority class (artifact images) remains poorly recognized
+
+- Model bias toward class 1 persists
+
+## Key Observations
+
+- High training F1 confirms model capacity.
+
+- Validation F1 degradation suggests overfitting.
+
+- Severe class imbalance impacts minority class detection.
+
+Model is biased toward predicting the majority class.
+
 
 
