@@ -6,4 +6,4 @@ def get_transforms():
         transforms.RandomHorizontalFlip(),
         transforms.RandomRotation(15),
         transforms.ToTensor()
-    ])
+    ]) 
