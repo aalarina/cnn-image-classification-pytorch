@@ -10,10 +10,7 @@
 
 Due to class imbalance, F1-score is used as the primary evaluation metric.
 
-<img width="981" height="451" alt="image" src="https://github.com/user-attachments/assets/4a50eae9-30e6-4906-9616-c74badc8a6a9" />
-<img width="981" height="451" alt="image" src="https://github.com/user-attachments/assets/4a50eae9-30e6-4906-9616-c74badc8a6a9" />
-<img width="981" height="451" alt="image" src="https://github.com/user-attachments/assets/4a50eae9-30e6-4906-9616-c74badc8a6a9" />
-
+<img width="981" height="451" alt="image" src="https://github.com/user-attachments/assets/52087b1b-8165-4ac5-b358-af1f371b800f" />
 
 ## Training Performance
 
