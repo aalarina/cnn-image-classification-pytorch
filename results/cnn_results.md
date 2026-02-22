@@ -8,9 +8,7 @@ Loss steadily decreases on the training set: Starts at 0.2214 → ends at 0.0684
 
 F1 score on training improves: Starts at 0.9361 → ends at 0.9764.
 
-Confusion matrices show that:
-
-The model predicts the majority class (class 1) very well.
+Confusion matrices show that the model predicts the majority class (class 1) very well.
 Minority class (class 0) predictions improve gradually but remain challenging.
 Model is learning effectively on the training data.
 
