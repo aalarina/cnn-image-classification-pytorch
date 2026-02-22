@@ -79,17 +79,3 @@ Deeper architecture alone does not solve imbalance issues.
 - Peak F1 before final epoch indicates early stopping necessity.
 
 Class imbalance remains the limiting factor despite deeper architecture.
-
-## Future improvements may include:
-
-- Weighted loss or Focal Loss
-
-- Oversampling / undersampling
-
-- Stronger augmentation
-
-- Early stopping
-
-- Threshold tuning
-
-- Balanced batch sampling
