@@ -4,6 +4,10 @@ The model was trained for 10 epochs on a highly imbalanced dataset (class 0: min
 
 ## Training Performance
 
+<img width="981" height="451" alt="image" src="https://github.com/user-attachments/assets/2d43249d-c9cd-454b-90be-8384b4ca4b58" />
+<img width="981" height="451" alt="image" src="https://github.com/user-attachments/assets/2d43249d-c9cd-454b-90be-8384b4ca4b58" />
+
+
 - Loss steadily decreases on the training set: Starts at 0.2214 → ends at 0.0684.
 
 - F1 score on training improves: Starts at 0.9361 → ends at 0.9764.
