@@ -1,6 +1,8 @@
 import torch
 from sklearn.metrics import f1_score
 from torch import optim, nn
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
 
 def train_one_epoch(model, loader, criterion, optimizer, device):
   model.train()
