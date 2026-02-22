@@ -2,6 +2,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 from torch.utils.data import DataLoader
 
+def get_image_list_from_dir(directory):
+  """Assumes files named like image_<frame_index>_<label>.png"""
+  files = sorted(glob(os.path.join(directory, '*.png')))
+  items = []
+  for f in files:
+    name = os.path.basename(f)
+    parts = name.split('_')
+    # label expected as last part like '0.png' or '1.png'
+    label_part = parts[-1]
+    label = int(label_part.split('.')[0])
+    items.append((f, label))
+  return items
+
 # Visualization helpers
 
 def show_augmented_examples(dataset, num=8):
