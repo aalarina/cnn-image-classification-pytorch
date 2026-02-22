@@ -1,19 +1,33 @@
-import torch
 from torch.utils.data import Dataset
 from PIL import Image
+from torchvision import transforms
 
-class ImageDataset(Dataset):
-    def __init__(self, image_paths, labels, transform=None):
-        self.image_paths = image_paths
+class ArtifactDataset(Dataset):
+    def __init__(self, files, labels, transform_0=None, transform_1=None, val_transform=None, train=True):
+        self.files = files
         self.labels = labels
-        self.transform = transform
+        self.train = train
+        self.transform_0 = transform_0
+        self.transform_1 = transform_1
+        self.val_transform = val_transform
 
     def __len__(self):
-        return len(self.image_paths)
+        return len(self.files)
 
     def __getitem__(self, idx):
-        img = Image.open(self.image_paths[idx]).convert("RGB")
-        if self.transform:
-            img = self.transform(img)
+        img_path = self.files[idx]
         label = self.labels[idx]
-        return img, label 
+        image = Image.open(img_path).convert('RGB')
+
+        if self.train:
+            if label == 0 and self.transform_0:
+                image = self.transform_0(image)
+            elif label == 1 and self.transform_1:
+                image = self.transform_1(image)
+        else:
+            if self.val_transform:
+                image = self.val_transform(image)
+            else:
+                image = transforms.ToTensor()(image)
+
+        return image, torch.tensor(label, dtype=torch.long)
