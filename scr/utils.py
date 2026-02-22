@@ -2,6 +2,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 from torch.utils.data import DataLoader
 
+def set_seed(seed=42):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+  
 def get_image_list_from_dir(directory):
   """Assumes files named like image_<frame_index>_<label>.png"""
   files = sorted(glob(os.path.join(directory, '*.png')))
