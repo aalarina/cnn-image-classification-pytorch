@@ -12,6 +12,8 @@ def load_config(path="configs/config.yaml"):
     with open(path, "r") as f:
         return yaml.safe_load(f)
 
+config = load_config()
+
 # Load dataset file paths and labels
 train_files_labels = get_image_list_from_dir("dataset/train")
 val_files_labels = get_image_list_from_dir("dataset/val")
