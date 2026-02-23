@@ -3,11 +3,11 @@ import yaml
 from torch import nn
 from torch.utils.data import DataLoader
 
-from scr.dataset import ArtifactDataset
-from scr.models import get_model
-from scr.utils.helpers import get_image_list_from_dir, show_augmented_examples
-from scr.train import train_one_epoch, validate, run_training
-from scr.transforms import get_transforms
+from src.dataset import ArtifactDataset
+from src.models import get_model
+from src.utils.helpers import get_image_list_from_dir, show_augmented_examples
+from src.train import train_one_epoch, validate, run_training
+from src.transforms import get_transforms
 
 from sklearn.model_selection import train_test_split
 
