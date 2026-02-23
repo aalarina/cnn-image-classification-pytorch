@@ -15,6 +15,27 @@ To achieve this, we implemented two models:
 
 - A predefined ResNet-18 model for comparison
 
+## Repository Structure
+```           
+src/                 # Source code
+  ├── dataset.py
+  ├── models.py
+  ├── train.py
+  ├── transforms.py
+  ├── configs/
+            └── config.yaml # YAML configuration file
+  └── utils/
+          ├── helpers.py
+          └── seed.py
+experiments/
+          ├── f1_cnn.md         # F1 & loss plots analysis for custom CNN
+          ├── f1_resnet18.md    # F1 & loss plots analysis for ResNet18
+          └── model_comparison.md     # Summary of model behavior
+notebooks/           # Example Colab notebook
+main.py              # Script to train & evaluate models
+README.md
+```
+
 ## Setup
 
 ### 1. Clone the repository
@@ -67,7 +88,7 @@ show_examples: True
 
 **Checkpointing** to save the best model automatically.
 
-**Experiment logging:** all models and results saved under ```experiments/```.
+**Experiment logging:** Analysis of model performance (F1 scores, behavior comparison between custom CNN and ResNet18) are saved under `experiments/` for reference and reproducibility.
 
 ## Results
 
