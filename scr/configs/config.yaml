@@ -4,3 +4,4 @@ epochs: 10
 image_size: 224
 num_classes: 2
 device: cuda
+show_examples: true
