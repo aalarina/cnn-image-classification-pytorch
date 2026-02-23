@@ -6,6 +6,7 @@ from scr.dataset import ArtifactDataset
 from scr.models import get_model
 from scr.utils.helpers import get_image_list_from_dir, show_augmented_examples
 from scr.train import train_one_epoch, validate, run_training
+from scr.transforms import get_transforms
 
 # Function to load configuration from YAML file
 def load_config(path="configs/config.yaml"):
@@ -25,9 +26,27 @@ val_files, val_labels = zip(*val_files_labels)
 test_files, test_labels = zip(*test_files_labels)
 
 # Create PyTorch datasets
-train_dataset = ArtifactDataset(train_files, train_labels, train=True)
-val_dataset = ArtifactDataset(val_files, val_labels, train=False)
-test_dataset = ArtifactDataset(test_files, test_labels, train=False)
+train_dataset = ArtifactDataset(
+    train_files,
+    train_labels,
+    train=True,
+    transform_0=transform_0,
+    transform_1=transform_1
+)
+
+val_dataset = ArtifactDataset(
+    val_files,
+    val_labels,
+    train=False,
+    val_transform=val_transform
+)
+
+test_dataset = ArtifactDataset(
+    test_files,
+    test_labels,
+    train=False,
+    val_transform=val_transform
+)
 
 # Show augmented examples (visualization step)
 show_augmented_examples(train_dataset)
