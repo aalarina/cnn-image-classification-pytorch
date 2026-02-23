@@ -50,7 +50,7 @@ def validate(model, loader, criterion, device):
   cm_val = confusion_matrix(labels_all, preds_all)
   return epoch_loss, epoch_f1, cm_val
 
-def run_training(model, train_loader, val_loader, epochs=10, lr=1e-4, device, save_path="/content/best_model.pth"):
+def run_training(model, train_loader, val_loader, epochs=10, lr=1e-4, device, save_path="/content/best_model.pth", train_labels):
   model.to(device)
 
   labels_tensor = torch.tensor(train_labels)
