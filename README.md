@@ -99,5 +99,3 @@ After training, the script outputs:
 - F1 score per epoch
 
 - Confusion matrix on train, validation, and test sets
-
-Saved models and metrics are in ```experiments/``` for reproducibility.
