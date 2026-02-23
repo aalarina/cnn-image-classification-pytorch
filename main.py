@@ -19,15 +19,28 @@ config = load_config()
 # Prepare transforms
 transform_0, transform_1, val_transform = get_transforms(config["image_size"])
 
-# Load dataset file paths and labels
-train_files_labels = get_image_list_from_dir("dataset/train")
-val_files_labels = get_image_list_from_dir("dataset/val")
-test_files_labels = get_image_list_from_dir("dataset/test")
+# Define paths
+TRAIN_DIR = "dataset/train"
+TEST_DIR = "dataset/test"
 
-# Separate file paths and labels
-train_files, train_labels = zip(*train_files_labels)
-val_files, val_labels = zip(*val_files_labels)
-test_files, test_labels = zip(*test_files_labels)
+# Load FULL train dataset
+all_items = get_image_list_from_dir(TRAIN_DIR)
+
+# SPLIT
+files = [f for f, _ in all_items]
+labels = [l for _, l in all_items]
+
+train_files, val_files, train_labels, val_labels = train_test_split(
+    files,
+    labels,
+    test_size=0.2,
+    stratify=labels,
+    random_state=42
+)
+
+# Load test
+test_items = get_image_list_from_dir(TEST_DIR)
+test_files, test_labels = zip(*test_items)
 
 # Create PyTorch datasets
 train_dataset = ArtifactDataset(
