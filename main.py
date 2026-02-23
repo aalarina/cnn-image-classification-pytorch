@@ -46,7 +46,7 @@ criterion = nn.CrossEntropyLoss(weight=class_weights.to(config["device"]))
 
 # Train the model
 model_cnn, history = run_training(model_cnn, train_loader, val_loader,
-                                  epochs=config["epochs"], lr=config["learning_rate"],
+                                  epochs=config["epochs"], lr=config["learning_rate"], device=config["device"],
                                   save_path="best_model_cnn.pth")
 
 # Load the best saved model
