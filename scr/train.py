@@ -50,21 +50,21 @@ def validate(model, loader, criterion, device):
   cm_val = confusion_matrix(labels_all, preds_all)
   return epoch_loss, epoch_f1, cm_val
 
-def run_training(model, train_loader, val_loader, epochs=10, lr=1e-4, save_path="/content/best_model.pth"):
-  model.to(DEVICE)
+def run_training(model, train_loader, val_loader, epochs=10, lr=1e-4, device, save_path="/content/best_model.pth"):
+  model.to(device)
 
   labels_tensor = torch.tensor(train_labels)
   class_counts = torch.bincount(labels_tensor)
   class_weights = 1.0 / class_counts.float()
 
-  criterion = nn.CrossEntropyLoss(weight=class_weights.to(DEVICE))
+  criterion = nn.CrossEntropyLoss(weight=class_weights.to(device))
   optimizer = optim.Adam(model.parameters(), lr=lr)
 
   best_val_f1 = 0.0
   history = {'train_loss': [], 'train_f1': [], 'val_loss': [], 'val_f1': []}
   for epoch in range(epochs):
-    train_loss, train_f1, train_cm = train_one_epoch(model, train_loader, criterion, optimizer, DEVICE)
-    val_loss, val_f1, val_cm = validate(model, val_loader, criterion, DEVICE)
+    train_loss, train_f1, train_cm = train_one_epoch(model, train_loader, criterion, optimizer, device)
+    val_loss, val_f1, val_cm = validate(model, val_loader, criterion, device)
 
     history['train_loss'].append(train_loss)
     history['val_loss'].append(val_loss)
