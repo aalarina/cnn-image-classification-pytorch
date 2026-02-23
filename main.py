@@ -78,7 +78,7 @@ val_loader = DataLoader(val_dataset, batch_size=config["batch_size"], shuffle=Fa
 test_loader = DataLoader(test_dataset, batch_size=config["batch_size"], shuffle=False)
 
 # Initialize CNN model
-model_cnn = get_model("cnn", num_classes=2)
+model_cnn = get_model("cnn", num_classes=config["num_classes"])
 model_cnn.to(config["device"])
 
 # Compute class weights to handle class imbalance
