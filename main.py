@@ -90,7 +90,7 @@ criterion = nn.CrossEntropyLoss(weight=class_weights.to(config["device"]))
 # --- Train the model ---
 model_cnn, history = run_training(model_cnn, train_loader, val_loader,
                                   epochs=config["epochs"], lr=config["learning_rate"], device=config["device"],
-                                  save_path="best_model_cnn.pth")
+                                  save_path="best_model_cnn.pth", train_labels=train_labels)
 
 # --- Load the best saved model ---
 checkpoint_cnn = torch.load("best_model_cnn.pth", map_location=config["device"])
