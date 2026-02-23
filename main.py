@@ -13,7 +13,11 @@ def load_config(path="configs/config.yaml"):
     with open(path, "r") as f:
         return yaml.safe_load(f)
 
+# Load config
 config = load_config()
+
+# Prepare transforms
+transform_0, transform_1, val_transform = get_transforms(config["image_size"])
 
 # Load dataset file paths and labels
 train_files_labels = get_image_list_from_dir("dataset/train")
