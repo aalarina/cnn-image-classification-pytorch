@@ -44,6 +44,3 @@ def count_labels(dataset):
     labels = [label for _, label in dataset]
     unique, counts = np.unique(labels, return_counts=True)
     return dict(zip(unique, counts))
-
-print("Train label distribution:", count_labels(train_dataset))
-print("Val label distribution:", count_labels(val_dataset))
