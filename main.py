@@ -3,6 +3,7 @@ import yaml
 from torch import nn
 from torch.utils.data import DataLoader
 
+# --- Import custom modules ---
 from src.dataset import ArtifactDataset
 from src.models import get_model
 from src.utils.helpers import get_image_list_from_dir, show_augmented_examples
@@ -11,25 +12,24 @@ from src.transforms import get_transforms
 
 from sklearn.model_selection import train_test_split
 
-# Function to load configuration from YAML file
+# --- Load configuration from YAML ---
 def load_config(path="configs/config.yaml"):
     with open(path, "r") as f:
         return yaml.safe_load(f)
 
-# Load config
 config = load_config()
 
-# Prepare transforms
+# --- Prepare image transforms / augmentations ---
 transform_0, transform_1, val_transform = get_transforms(config["image_size"])
 
-# Define paths
+# --- Define dataset paths ---
 TRAIN_DIR = "dataset/train"
 TEST_DIR = "dataset/test"
 
-# Load FULL train dataset
+# --- Load full training dataset (all files and labels) ---
 all_items = get_image_list_from_dir(TRAIN_DIR)
 
-# SPLIT
+# --- Split into train and validation sets ---
 files = [f for f, _ in all_items]
 labels = [l for _, l in all_items]
 
@@ -41,11 +41,11 @@ train_files, val_files, train_labels, val_labels = train_test_split(
     random_state=42
 )
 
-# Load test
+# --- Load test dataset ---
 test_items = get_image_list_from_dir(TEST_DIR)
 test_files, test_labels = zip(*test_items)
 
-# Create PyTorch datasets
+# --- Create PyTorch datasets with appropriate transforms ---
 train_dataset = ArtifactDataset(
     train_files,
     train_labels,
@@ -68,37 +68,37 @@ test_dataset = ArtifactDataset(
     val_transform=val_transform
 )
 
-# Show augmented examples (visualization step)
+# --- Optional: visualize augmented examples from training dataset ---
 if config.get("show_examples", False):
     show_augmented_examples(train_dataset)
 
-# Create DataLoaders for batching
+# --- Create DataLoaders for batching ---
 train_loader = DataLoader(train_dataset, batch_size=config["batch_size"], shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=config["batch_size"], shuffle=False)
 test_loader = DataLoader(test_dataset, batch_size=config["batch_size"], shuffle=False)
 
-# Initialize CNN model
+# --- Initialize model ---
 model_cnn = get_model("cnn", num_classes=config["num_classes"])
 model_cnn.to(config["device"])
 
-# Compute class weights to handle class imbalance
+# --- Compute class weights to handle class imbalance ---
 labels_tensor = torch.tensor(train_labels)
 class_counts = torch.bincount(labels_tensor)
 class_weights = 1.0 / class_counts.float()
 criterion = nn.CrossEntropyLoss(weight=class_weights.to(config["device"]))
 
-# Train the model
+# --- Train the model ---
 model_cnn, history = run_training(model_cnn, train_loader, val_loader,
                                   epochs=config["epochs"], lr=config["learning_rate"], device=config["device"],
                                   save_path="best_model_cnn.pth")
 
-# Load the best saved model
+# --- Load the best saved model ---
 checkpoint_cnn = torch.load("best_model_cnn.pth", map_location=config["device"])
 model_cnn.load_state_dict(checkpoint_cnn['model_state_dict'])
 model_cnn.eval()
 print(f"Loaded model from epoch {checkpoint_cnn['epoch']} with F1={checkpoint_cnn['val_f1']:.4f}")
 
-# Evaluate the model on the test set
+# --- Evaluate the model on the test set ---
 test_loss_cnn, test_f1_cnn, test_cm_cnn = validate(model_cnn, test_loader, criterion, config["device"])
 print(f"Test Loss: {test_loss_cnn:.4f}, Test F1: {test_f1_cnn:.4f}")
 print("Confusion Matrix (Test):")
