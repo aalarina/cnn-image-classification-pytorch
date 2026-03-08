@@ -110,7 +110,7 @@ show_examples: True
 ## Model Selection
 
 The training pipeline is implemented with a custom CNN as the default model.
-However, the repository also includes support for ResNet-18 for comparison.
+For comparison purposes, the repository also includes an implementation of ResNet-18.
 
 To switch between models, simply modify the model initialization in the training script.
 
