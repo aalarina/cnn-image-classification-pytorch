@@ -173,3 +173,11 @@ After training, the script outputs:
 - F1 score per epoch
 
 - Confusion matrix on train, validation, and test sets
+
+After training, the script outputs:
+
+- Training & validation loss per epoch
+- F1 score per epoch
+- Confusion matrix on train, validation and test sets
+
+Detailed experiment results, visualizations, and model comparisons are documented in the `experiments/` directory.
