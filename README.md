@@ -38,6 +38,7 @@ Data → Augmentations → Model → Training → Evaluation → Experiments
 
 **Reproducible experiments** – controlled seeds and structured experiment outputs
 
+
 ## Applications
 
 Potential use cases of the artifact detection system include:
@@ -105,6 +106,47 @@ num_classes: 2
 device: cuda
 show_examples: True
 ```
+
+## Model Selection
+
+The training pipeline is implemented with a custom CNN as the default model.
+However, the repository also includes support for ResNet-18 for comparison.
+
+To switch between models, simply modify the model initialization in the training script.
+
+Example (default custom CNN):
+
+```
+model_cnn = get_model("cnn", num_classes=config["num_classes"])
+```
+
+To train ResNet-18 instead:
+
+```
+model_cnn = get_model("resnet18", num_classes=config["num_classes"])
+```
+
+The model factory function in models.py handles the selection:
+
+```
+def get_resnet18(num_classes=2, pretrained=False):
+    model = models.resnet18(pretrained=pretrained)
+    num_ftrs = model.fc.in_features
+    model.fc = nn.Linear(num_ftrs, num_classes)
+    return model
+
+def get_model(model_name, num_classes):
+    if model_name == "resnet18":
+        return get_resnet18(num_classes)
+
+    elif model_name == "cnn":
+        return ArtifactCNN(num_classes)
+
+    else:
+        raise ValueError(f"Unknown model: {model_name}")
+```
+
+This design allows easy experimentation with different architectures without modifying the training pipeline.
 
 ## Features
 
