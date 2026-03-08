@@ -36,6 +36,39 @@ main.py              # Script to train & evaluate models
 README.md
 ```
 
+## Project Scope
+
+This project implements an end-to-end deep learning pipeline for detecting artifacts in AI-generated images.
+
+The pipeline covers the full workflow from data preprocessing to experiment analysis and reproducibility.
+
+### Pipeline
+```
+Data → Augmentations → Model → Training → Evaluation → Experiments
+```
+
+### Key Characteristics
+
+**Modular training pipeline** – training logic is separated into reusable components
+
+**Experiment tracking** – results and analysis stored in the ```experiments/``` directory
+
+**Class imbalance handling** – weighted loss and class-specific augmentations
+
+**Configurable training** – all key parameters controlled via YAML configuration
+
+**Reproducible experiments** – controlled seeds and structured experiment outputs
+
+## Applications
+
+Potential use cases of the artifact detection system include:
+
+- **Filtering AI-generated content** before publication
+- **Dataset cleaning** for generative model training
+- **Quality control pipelines** for synthetic image generation
+- **Detection of common generative artifacts** (distorted hands, text fragments, masks, etc.)
+
+
 ## Setup
 
 ### 1. Clone the repository
