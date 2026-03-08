@@ -169,14 +169,6 @@ This design allows easy experimentation with different architectures without mod
 After training, the script outputs:
 
 - Training & validation loss per epoch
-
-- F1 score per epoch
-
-- Confusion matrix on train, validation, and test sets
-
-After training, the script outputs:
-
-- Training & validation loss per epoch
 - F1 score per epoch
 - Confusion matrix on train, validation and test sets
 
