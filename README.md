@@ -15,27 +15,6 @@ To achieve this, we implemented two models:
 
 - A predefined ResNet-18 model for comparison
 
-## Repository Structure
-```           
-src/                 # Source code
-  ├── dataset.py
-  ├── models.py
-  ├── train.py
-  ├── transforms.py
-  ├── configs/
-            └── config.yaml # YAML configuration file
-  └── utils/
-          ├── helpers.py
-          └── seed.py
-experiments/
-          ├── f1_cnn.md         # F1 & loss plots analysis for custom CNN
-          ├── f1_resnet18.md    # F1 & loss plots analysis for ResNet18
-          └── model_comparison.md     # Summary of model behavior
-notebooks/           # Example Colab notebook
-main.py              # Script to train & evaluate models
-README.md
-```
-
 ## Project Scope
 
 This project implements an end-to-end deep learning pipeline for detecting artifacts in AI-generated images.
@@ -68,6 +47,26 @@ Potential use cases of the artifact detection system include:
 - **Quality control pipelines** for synthetic image generation
 - **Detection of common generative artifacts** (distorted hands, text fragments, masks, etc.)
 
+## Repository Structure
+```           
+src/                 # Source code
+  ├── dataset.py
+  ├── models.py
+  ├── train.py
+  ├── transforms.py
+  ├── configs/
+            └── config.yaml # YAML configuration file
+  └── utils/
+          ├── helpers.py
+          └── seed.py
+experiments/
+          ├── f1_cnn.md         # F1 & loss plots analysis for custom CNN
+          ├── f1_resnet18.md    # F1 & loss plots analysis for ResNet18
+          └── model_comparison.md     # Summary of model behavior
+notebooks/           # Example Colab notebook
+main.py              # Script to train & evaluate models
+README.md
+```
 
 ## Setup
 
